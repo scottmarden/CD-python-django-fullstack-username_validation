@@ -5,8 +5,16 @@
 		<title>Username Validator</title>
 	</head>
 	<body>
+		{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+			<li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
 		<h1>Username Validation!</h1>
-		<form>
+		<form action="/process" method="post">
+			{% csrf_token %}
 			Username: <input type="text" name="user_name" />
 			<input type="submit" value="Submit!" />
 		</form>
